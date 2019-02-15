@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
-  HttpErrorResponse
 } from '@angular/common/http';
-import { SpotifyApiService } from 'src/app/services/spotify-api.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { SpotifyAuthService } from '../auth/spotify-auth.service';
+import { TokenObject } from 'src/app/utils/typings/auth.typings';
 
 
 @Injectable({
@@ -17,33 +17,30 @@ import { tap } from 'rxjs/operators';
 })
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(public auth: SpotifyApiService) {
-  }
+  constructor(public auth: SpotifyAuthService) { }
 
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (this.auth.getToken()) {
+    const tokenObject: TokenObject = this.auth.getToken();
+
+    if (tokenObject) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.auth.getToken()}`
+          Authorization: `${tokenObject.token_type} ${tokenObject.access_token}`
         }
       });
     }
 
     return next.handle(request).pipe(tap(
-    (event: HttpEvent<any>) => {
-      
+      (event: HttpEvent<any>) => {
 
-      if (event instanceof HttpResponse) {
+        if (event instanceof HttpResponse) {
 
-        if (event.body && event.body.error) {
-          throw(event);
+          if (event.body && event.body.error) throw (event);
+
         }
 
-      }
-
-    },
-    (error: any) => {}));
+      }));
   }
 }
