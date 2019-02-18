@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpotifyAuthService } from './services/auth/spotify-auth.service';
 import { ArtistsService } from './services/entities/artists.service';
-import { getAllUrlParams } from './utils/app.utils';
+import { ARTISTS_ID } from './utils/consts/consts.utils';
 
 @Component({
   selector: 'app-root',
@@ -11,27 +11,27 @@ import { getAllUrlParams } from './utils/app.utils';
 })
 export class AppComponent implements OnInit {
 
-  public artists = [
-    { id: "4kwxTgCKMipBKhSnEstNKj", name: 'Animal Collective' },
-    { id: "37ZflmHTdxkSLQuT8w9NBs", name: 'Criolo' },
-    { id: "4Va55p3P2P96lIgzntievo", name: 'Nação Zumbi' },
-    { id: "0ohvsn0lgt51qZUbu9ct4s", name: 'Boogarins' },
-    { id: "74ASZWbe4lXaubB36ztrGX", name: 'Bob Dylan' }
-  ];
-  public artist = this.artists[0];
+  public artists;
   public selectedArtist: string;
   public artistData: any;
+  public artistAlbums;
 
-  constructor(private auth: SpotifyAuthService, private artistsService: ArtistsService, private router: ActivatedRoute) { 
+  constructor(private auth: SpotifyAuthService, private artistsService: ArtistsService, private router: ActivatedRoute) {
     this.auth.isAuthorized();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.artistsService.get({ query: { ids: ARTISTS_ID.join(',') } }).subscribe(
+      res => this.artists = res.artists
+    );
+  }
 
   public changeArtist() {
-    this.artistsService.get({ id: this.selectedArtist }).subscribe(
-      res => this.artistData = res
-    );
+    this.artistsService.get({ id: this.selectedArtist, url: 'albums', query: { include_groups: 'album' } }).subscribe(
+      res => {
+      this.artistData = res
+        this.artistAlbums = res.items;
+      });
   }
 
 

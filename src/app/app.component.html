@@ -1,6 +1,6 @@
 <div class="row">
   <mat-card>
-  
+
     <mat-form-field appearance="outline">
       <mat-select [(ngModel)]="selectedArtist" (selectionChange)="changeArtist()" placeholder="Artista">
         <mat-option *ngFor="let artist of artists" [value]="artist.id">
@@ -8,12 +8,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  
+
   </mat-card>
 
-
-  <h1 *ngIf="artistData">
-    A popularidade do {{artistData.name}} é {{artistData.popularity}}
-  </h1>
-
 </div>
+
+<app-artist-tracks [albums]="artistAlbums"></app-artist-tracks>

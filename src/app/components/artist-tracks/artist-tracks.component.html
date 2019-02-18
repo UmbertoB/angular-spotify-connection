@@ -1,0 +1,46 @@
+<div [@fade] *ngIf="tracks" class="row">
+
+  <div class="tracks-section-title">
+    <h1>
+      Todas as músicas do artista
+    </h1>
+
+    <mat-form-field>
+      <input name="search" [(ngModel)]="search" matInput placeholder="Buscar">
+    </mat-form-field>
+    
+    <div class="albums-row">
+      <div *ngFor="let album of albums" class="albums" [title]="album.name">
+  
+        <img class="album-cover" [src]="album.images[0].url" alt="">
+  
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <div class="tracks-section">
+
+    <div class="grid-row">
+      <div *ngFor="let track of tracks | filter : search : 'name'" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12">
+        <mat-card>
+
+          <mat-card-subtitle>
+            Track {{track.track_number}}
+          </mat-card-subtitle>
+
+          <mat-card-content>
+            {{track.name}}
+          </mat-card-content>
+
+
+        </mat-card>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

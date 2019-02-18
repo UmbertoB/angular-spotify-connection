@@ -1,0 +1,1 @@
+export const ARTISTS_ID = ['4kwxTgCKMipBKhSnEstNKj','37ZflmHTdxkSLQuT8w9NBs','4Va55p3P2P96lIgzntievo','0ohvsn0lgt51qZUbu9ct4s','74ASZWbe4lXaubB36ztrGX'];

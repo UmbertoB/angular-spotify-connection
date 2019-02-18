@@ -1,0 +1,48 @@
+.tracks-section-title {
+    padding: 15px;
+    margin-top: 30px;
+}
+.tracks-section-title h1 {
+    margin-bottom: 5px;
+}
+
+.tracks-section {
+    height: 55vh;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+
+
+.albums {
+    display: inline;
+}
+
+.album-cover {
+    width: 50px;
+    margin-right: 15px;
+}
+
+
+
+
+.tracks-section::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+.tracks-section::-webkit-scrollbar-thumb {
+  background: #949494;
+  border-radius: 20px;
+}
+
+.tracks-section::-webkit-scrollbar-track {
+  background: rgb(230, 230, 230);
+  border-radius: 20px;
+}
+
+
+
+
+mat-card {
+    min-height: 7em;
+}

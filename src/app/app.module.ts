@@ -13,11 +13,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {MatCardModule} from '@angular/material/card';
-
+import { ArtistTracksComponent } from './components/artist-tracks/artist-tracks.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortByPipe } from './pipes/sort-by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ArtistTracksComponent,
+    FilterPipe,
+    SortByPipe
   ],
   imports: [
     MatFormFieldModule,

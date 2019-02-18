@@ -1,7 +1,7 @@
 export interface TokenObject {
     access_token: string
-    token_type:  string
-    expires_in:  string
+    token_type:   string
+    expires_in:   string
 }
 
 export interface AuthParams {

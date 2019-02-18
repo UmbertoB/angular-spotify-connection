@@ -23,12 +23,13 @@ export function getCookie(cname): string {
 }
 
 export const isObjectEmpty = (obj) => {
+  const flag = true;
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
-      return false;
+      return !flag;
     }
   }
-  return true;
+  return flag;
 };
 
 export const getAllUrlParams = (urlParams: string): any => {
